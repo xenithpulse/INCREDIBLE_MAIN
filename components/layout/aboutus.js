@@ -11,7 +11,6 @@ const AboutSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-top: 60px;
-  margin-bottom: 1px;
 
   // Background image
   &::before {
@@ -137,7 +136,7 @@ const AboutUs = () => {
         <div className="about-text">
           <h2>About Us</h2>
           <p>
-          At <strong>Incredible Homes</strong>, we believe that your home should be a reflection of your unique style.
+          At <strong style={{color:"#00BFFF"}}>INCREDIBLE HOMES</strong>, we believe that your home should be a reflection of your unique style.
 We're dedicated to providing exceptional home decor and household items crafted with meticulous 
 attention to detail and using premium materials
           </p>

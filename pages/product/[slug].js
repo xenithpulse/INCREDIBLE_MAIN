@@ -25,9 +25,11 @@ import { PageWrapper,
   PropertyTitle,
   MessageContainer,
   } from "../../components/styled/page_styled";
+import { generateProductSEO } from "@/components/utils/seo.config";
 
 export default function ProductPage({ product, similarProducts }) {
   const { addProduct } = useContext(CartContext);
+  const seoData = generateProductSEO(product);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [errors, setErrors] = useState({});
   const [price, setPrice] = useState(product.price);
@@ -233,6 +235,7 @@ const renderPriceSection = () => {
 
   return (
     <>
+      <seoData {...seoData} />
       <Header />
       <Center>
         <PageWrapper>
@@ -320,26 +323,36 @@ const renderPriceSection = () => {
 
 export async function getServerSideProps(context) {
   await mongooseConnect();
-  const { id } = context.query;
+  const { slug } = context.query;
 
-  // Find the current product by ID
-  const product = await Product.findById(id).populate('category');
-  if (!product) {
+  try {
+    // Find the current product by slug
+    const product = await Product.findOne({ slug }).populate('category').lean(); // Use findOne with slug
+
+    if (!product) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Fetch up to 12 similar products from the same category, excluding the current product
+    const similarProducts = await Product.find({
+      category: product.category?._id,
+      slug: { $ne: product.slug }, // Exclude current product by slug
+    }).limit(12).lean(); // Use lean() for better performance
+
     return {
-      notFound: true,
+      props: {
+        product: JSON.parse(JSON.stringify(product)),
+        similarProducts: JSON.parse(JSON.stringify(similarProducts)),
+      },
+    };
+  } catch (error) {
+    console.error("Error in getServerSideProps:", error);
+    return {
+      props: {
+        error: "Failed to fetch product data.", // Provide an error message
+      },
     };
   }
-
-  // Fetch up to 12 similar products from the same category, excluding the current product
-  const similarProducts = await Product.find({ 
-    category: product.category?._id, 
-    _id: { $ne: product._id } 
-  }).limit(12);
-
-  return {
-    props: {
-      product: JSON.parse(JSON.stringify(product)),
-      similarProducts: JSON.parse(JSON.stringify(similarProducts)),
-    },
-  };
 }

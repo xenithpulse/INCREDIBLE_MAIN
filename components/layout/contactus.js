@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ContactSection, ContactForm, FormGroup, Label, Input, Select, TextArea, SubmitButton, ErrorMessage, FormGroupContainer } from '@/components/styled/ContactForm_sty';
+import { ContactSection, ContactForm, FormGroup, Label, Input, Select, TextArea, SubmitButton, ErrorMessage, FormGroupContainer, WhatsAppButton } from '@/components/styled/ContactForm_sty';
 import Title from '@/components/styled/Title';
 import Center from '@/homecenter';
+import { Button } from '../Map/Button';
 
 
 const ContactUs = () => {
@@ -93,6 +94,9 @@ const ContactUs = () => {
                 </FormGroup>
                 <SubmitButton type="submit">Submit</SubmitButton>
             </ContactForm>
+
+            <Title style={{fontSize:"1.8rem", textAlign:"center"}}>Or</Title>
+            < WhatsAppButton/>
         </ContactSection>
     );
 };

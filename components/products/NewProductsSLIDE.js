@@ -70,7 +70,7 @@ const ProductSlide = ({ products }) => {
       <ProductTrack isPaused={isPaused}>
         {products.concat(products).map((product, index) => ( // Duplicate products for seamless looping
           <StyledProductBox 
-            key={`${product.id}-${index}`} // Ensure a unique key by appending the index
+            key={`${product.slug}-${index}`} // Ensure a unique key by appending the index
             product={product} 
           />
         ))}

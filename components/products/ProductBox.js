@@ -5,6 +5,9 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import { ProductWrapper, Top, Bottom, Inside, WhiteBox } from "../styled/productsbox";
 import Image from "next/image";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 
 const ImageWrapper = styled.div`
   background-color: #fff;
@@ -30,12 +33,18 @@ const ImageWrapper = styled.div`
   }
 `;
 
-export default function ProductBox({ _id, title, price, images, discounted_percentage, properties }) {
+export default function ProductBox({ title, price, images, discounted_percentage, properties, slug }) {
   const [isClicked, setIsClicked] = useState(false);
   const router = useRouter();
+  const [loading, setLoading] = useState(true); // Add loading state
+
 
   const handleImageClick = () => {
-    router.push(`/product/${_id}`); // Navigate to the single product page
+    router.push(`/product/${slug}`); // Navigate to the single product page
+  };
+
+  const handleImageLoad = () => {
+    setLoading(false); // Set loading to false when image is loaded
   };
 
   const originalPrice = parseFloat(price);
@@ -89,14 +98,23 @@ export default function ProductBox({ _id, title, price, images, discounted_perce
           )}
         </div>
       </Inside>
-      <ImageWrapper>
 
+      <ImageWrapper>
+      {loading && ( // Show skeleton while loading
+          <Skeleton
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            baseColor="#e0e0e0" // Adjust colors as needed
+            highlightColor="#f5f5f5"
+          />
+        )}
       <Image
           src={images?.[0]}  // The image source
           alt={title}         // Alt text for the image
           layout="fill"        // Fill the entire container
           objectFit="cover"    // Mimic the 'object-fit: cover' behavior
+          onLoad={handleImageLoad} // Call handleImageLoad when image loads
           onClick={handleImageClick} // OnClick event handler
+          style={{ display: loading ? 'none' : 'block' }} // Hide image while loading
         />
       </ImageWrapper>
     </ProductWrapper>

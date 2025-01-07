@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import NavLink from 'next/link';
 import Center from "@/homecenter";
 import Title from '../styled/Title';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 
 
 // Styled grid for categories with responsiveness
@@ -93,15 +96,25 @@ export default function CategoryBox({ categories, loading }) {
       <CategoryGrid>
         {loading && <Loader />}  {/* Show loader while loading */}
         {categories && categories.map((category) => (
-          <CategorySquare 
-            href={`/category/${encodeURIComponent(category.name)}`} 
-            key={category._id} 
+          <CategorySquare
+            href={`/category/${encodeURIComponent(category.name)}`}
+            key={category._id}
             passHref
           >
-            <CategoryImage image={category.image}>
-              <Overlay />
-              <CategoryTitle>{category.name}</CategoryTitle>
-            </CategoryImage>
+            {/* Conditionally render skeleton or image */}
+            {loading ? (
+              <Skeleton
+                width={150}
+                height={150}
+                baseColor="#e0e0e0" // Adjust colors as needed
+                highlightColor="#f5f5f5"
+              />
+            ) : (
+              <CategoryImage image={category.image}>
+                <Overlay />
+                <CategoryTitle>{category.name}</CategoryTitle>
+              </CategoryImage>
+            )}
           </CategorySquare>
         ))}
       </CategoryGrid>

@@ -273,7 +273,7 @@ if (isSuccess) {
         <AnnouncementBar 
           messages={[
             "We will call you soon to confirm the order",
-            "Free shipping all over Pakistan!"
+            "Delivery all over Pakistan!"
           ]}/>
       </div>
     );

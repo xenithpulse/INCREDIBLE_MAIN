@@ -13,6 +13,7 @@ import {
   StatLabel,
   GradientTitle,
 } from '@/components/styled/whychoose_sty';
+import styled from 'styled-components';
 
 
 
@@ -43,8 +44,8 @@ const WhyChooseUs = () => {
           satisfiedcustomers: 5000,
         };
 
-        const duration = 2000; // Animation duration in ms
-        const incrementStep = 50; // Step interval in ms
+        const duration = 4000; // Animation duration in ms
+        const incrementStep = 20; // Step interval in ms
 
         const incrementStats = (key, target) => {
           let current = 0;
@@ -87,7 +88,9 @@ const WhyChooseUs = () => {
       <GradientTitle>Uncompromising Quality</GradientTitle>
       <Subheading> Design-Driven Home Essentials</Subheading> {/* Translate subtitle */}
       <Description>
-      Creating a beautiful home shouldn't break the bank. Incredible Homes offers a wide range of stylish and functional home decor and household essentials at accessible prices, making quality design available to everyone.
+      Creating a beautiful home shouldn't break the bank. <strong style={{color:"#00BFFF"}}>INCREDIBLE HOMES </strong>
+       offers a wide range of stylish and functional home decor and 
+       household essentials at accessible prices, making quality design available to everyone.
     </Description>
       <StatsContainer>
         <StatItem>
@@ -96,7 +99,7 @@ const WhyChooseUs = () => {
         </StatItem>
         <StatItem>
           <StatNumber>{stats.clients}</StatNumber>
-          <StatLabel>Satisfied Clients</StatLabel> {/* Translate label */}
+          <StatLabel>Active Clients</StatLabel> {/* Translate label */}
         </StatItem>
         <StatItem>
           <StatNumber>{stats.team}</StatNumber>

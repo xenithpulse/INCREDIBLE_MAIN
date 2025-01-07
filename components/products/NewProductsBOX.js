@@ -92,7 +92,7 @@ const DiscountedPercentage = styled.div`
 const ProductBox = ({ product }) => {
   const router = useRouter();
   const handleImageClick = () => {
-    router.push(`/product/${product._id}`);
+    router.push(`/product/${product.slug}`);
   };
 
 const discount_amount = product.price * product.discounted_percentage / 100

@@ -17,39 +17,46 @@ import Title from "@/components/styled/Title";
 import ContactUs from "@/components/layout/contactus";
 import MoreAboutUs from "@/components/layout/moreaboutus";
 import WhyChooseUs from "@/components/layout/whychoseus";
-
+import B2B from "@/components/layout/b2bsection";
+import { NextSeo } from 'next-seo';
+import { websiteSEO } from '@/components/utils/seo.config'; // Adjust path as needed
 
 export default function HomePage({ newProducts, shuffledProducts, categories }) {
+
   return (
-    <div style={{  overflowX: "hidden" }}>
-      <div style={{marginBottom:"28px"}}>
-        <AnnouncementBar 
-          messages={[
-            "Welcome to The Incredible Homes",
-            "We deal in home decor & household items",
-            "Delivery all over Pakistan!"
-          ]}/>
-    </div>
-      <div style={{marginTop:"30px", position:"relative"}}>
-      <Header />
+    <>
+      <NextSeo {...websiteSEO} />
+      <div style={{ overflowX: "hidden" }}>
+        <div style={{ marginBottom: "28px" }}>
+          <AnnouncementBar
+            messages={[
+              "Welcome to The Incredible Homes",
+              "We deal in home decor & household items",
+              "Delivery all over Pakistan!"
+            ]} />
+        </div>
+        <div style={{ marginTop: "30px", position: "relative" }}>
+          <Header />
+        </div>
+        <NextJsCarousel />
+        <div>
+          <Center>
+            <Title style={{ marginBottom: '-20px' }}>New Arrivals</Title>
+          </Center>
+        </div>
+        <ProductSlide products={newProducts} />
+        <CategoryBox categories={categories} />
+        <BannerSection />
+        <ShuffledProducts products={shuffledProducts} />
+        <AboutUs />
+        <WhyChooseUs />
+        <MoreAboutUs />
+        <GoogleReviews />
+        <B2B />
+        <ContactUs />
+        <Footer />
       </div>
-      <NextJsCarousel />
-      <div>
-      <Center>
-        <Title style={{ marginBottom: '-20px' }}>New Arrivals</Title>
-      </Center>
-      </div>
-      <ProductSlide products={newProducts} />
-      <CategoryBox categories={categories} />
-      <BannerSection/>
-      <ShuffledProducts products={shuffledProducts} />
-      <AboutUs />
-      <WhyChooseUs />
-      <MoreAboutUs />
-      <GoogleReviews/>
-      <ContactUs />
-      <Footer />
-    </div>
+    </>
   );
 }
 

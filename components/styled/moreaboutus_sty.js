@@ -9,6 +9,7 @@ export const Section = styled.section`
   height: auto; /* Adjust to accommodate the content height */
   justify-content: center;
   margin-bottom: -25px;
+  z-index: -2;
 `;
 
 export const Container = styled.div`
@@ -41,45 +42,52 @@ const animateBorder = keyframes`
 // Line styles for borders
 const Line = styled.div`
   position: absolute;
-  background: linear-gradient(90deg, #CE20F9, #5200FF);
+   background: linear-gradient(90deg, #00F5A0, #00D9F5);
+  // background: linear-gradient(90deg, #FF7EB3, #FF758C, #FF6B58); 
+  // background: linear-gradient(90deg, #3A1C71, #D76D77, #FFAF7B);
+
   transform-origin: left;
-  animation: ${animateBorder} 12s linear infinite;
+  animation: ${animateBorder} 10s linear infinite;
 `;
 
+// Top line
 const TopLine = styled(Line)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 2px;
   transform-origin: left;
   animation-delay: ${({ delay }) => delay}s;
 `;
 
+// Bottom line
 const BottomLine = styled(Line)`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 2px;
   transform-origin: right;
-  animation-delay: ${({ delay }) => delay + 1.5}s;
+  animation-delay: ${({ delay }) => delay + 2}s;
 `;
 
+// Left line
 const LeftLine = styled(Line)`
   top: 0;
   left: 0;
-  width: 4px;
+  width: 2px;
   height: 100%;
   transform-origin: top;
-  animation-delay: ${({ delay }) => delay + 3}s;
+  animation-delay: ${({ delay }) => delay + 4}s;
 `;
 
+// Right line
 const RightLine = styled(Line)`
   top: 0;
   right: 0;
-  width: 4px;
+  width: 2px;
   height: 100%;
   transform-origin: bottom;
-  animation-delay: ${({ delay }) => delay + 4.5}s;
+  animation-delay: ${({ delay }) => delay + 6}s;
 `;
 
 // Box outline container
@@ -97,9 +105,9 @@ export const Box = styled.div`
   position: relative;
   padding: 50px;
   text-align: center;
-  flex: 1; /* Default flex value for larger screens */
+  flex: 1;
   min-width: 280px;
-  max-width: 100%; /* Prevent the box from overflowing its container */
+  max-width: 100%;
   height: 300px;
   background-color: #000;
   border: 1px solid #555;
@@ -111,7 +119,6 @@ export const Box = styled.div`
     animation-play-state: running;
   }
 `;
-
 
 // Main component
 export const BoxWithOutlineEffect = ({ children, delay = 0 }) => {

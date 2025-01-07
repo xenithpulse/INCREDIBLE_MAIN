@@ -22,7 +22,6 @@ const StyledHeader = styled.header`
   transition: top 0.3s; /* Smooth transition when hiding/showing */
 `;
 
-// Logo styling
 const Logo = styled(Link)`
   color: #fff;
   text-decoration: none;
@@ -32,13 +31,22 @@ const Logo = styled(Link)`
   transform: translateY(-50%);
   z-index: 3;
 
-  /* Center logo on mobile devices */
+  /* Responsive design for different screen sizes */
+  @media screen and (max-width: 1200px) {
+    font-size: 1.2rem; /* Adjust for tablet or medium devices */
+  }
+
   @media screen and (max-width: 768px) {
     left: 50%;
-    font-size: small;
+    font-size: 1rem; /* Adjust font size for mobile */
     transform: translate(-50%, -50%);
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem; /* Further reduce font size for very small devices */
+  }
 `;
+
 
 // Wrapper for layout positioning
 const Wrapper = styled.div`

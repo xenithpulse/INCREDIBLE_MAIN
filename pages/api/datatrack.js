@@ -1,8 +1,6 @@
 import TrackingData from '@/models/Tracking';
 
 export default async function handler(req, res) {
-  console.log('Incoming request:', req.method, req.body);
-
   if (req.method === 'POST') {
     try {
       const trackingData = req.body;

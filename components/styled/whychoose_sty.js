@@ -51,6 +51,9 @@ export const Subheading = styled.h3`
 export const Description = styled.p`
   font-size: 1.3rem;
   color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
   margin-bottom: 40px;
   line-height: 1.6;
   
