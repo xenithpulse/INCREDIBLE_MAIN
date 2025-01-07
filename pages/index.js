@@ -5,12 +5,10 @@ import { Category } from "@/models/Category";
 import { mongooseConnect } from "@/lib/mongoose";
 import AboutUs from "@/components/layout/aboutus";
 import Footer from "@/components/layout/footer";
-import Image from 'next/image';
 import ShuffledProducts from "@/components/products/shuffledhomeproducts";
 import { getShuffledProducts } from "@/components/products/shuffledproduct"; // Import the new shuffled products service
 import ProductSlide from "@/components/products/NewProductsSLIDE";
 import CategoryBox from "@/components/utils/category_box";
-import GoogleMap from "@/components/Map/Googlemap";
 import GoogleReviews from "@/components/Map/GoogleReviews";
 import  BannerSection  from "@/components/layout/Banner";
 import AnnouncementBar from "@/components/layout/announcementbar";
@@ -20,6 +18,7 @@ import ContactUs from "@/components/layout/contactus";
 import MoreAboutUs from "@/components/layout/moreaboutus";
 import WhyChooseUs from "@/components/layout/whychoseus";
 
+
 export default function HomePage({ newProducts, shuffledProducts, categories }) {
   return (
     <div style={{  overflowX: "hidden" }}>
@@ -27,7 +26,7 @@ export default function HomePage({ newProducts, shuffledProducts, categories }) 
         <AnnouncementBar 
           messages={[
             "Welcome to The Incredible Homes",
-            "We deal in home decor & houseHold items",
+            "We deal in home decor & household items",
             "Delivery all over Pakistan!"
           ]}/>
     </div>
@@ -45,9 +44,8 @@ export default function HomePage({ newProducts, shuffledProducts, categories }) 
       <BannerSection/>
       <ShuffledProducts products={shuffledProducts} />
       <AboutUs />
-      <MoreAboutUs />
       <WhyChooseUs />
-      <GoogleMap/>
+      <MoreAboutUs />
       <GoogleReviews/>
       <ContactUs />
       <Footer />

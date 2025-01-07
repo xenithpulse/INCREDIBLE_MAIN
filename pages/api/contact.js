@@ -8,28 +8,16 @@ export default async function handler(req, res) {
       await mongooseConnect(); // Connect to MongoDB
 
       const {
-        firstName,
-        lastName,
+        fullName,
         phone,
         email,
-        serviceAddress,
-        city,
-        state,
-        zip,
-        homeOrBusiness,
         comments,
       } = req.body;
 
       const contactDoc = await Contact.create({
-        firstName,
-        lastName,
+        fullName,
         phone,
         email,
-        serviceAddress,
-        city,
-        state,
-        zip,
-        homeOrBusiness,
         comments,
       });
 

@@ -23,8 +23,10 @@ export const ContactSection = styled.section`
 export const ContactForm = styled.form`
   width: 100%;
   max-width: 1200px;
+  border-right: 0.5px solid #00BFFF;
   padding: 30px;
-  border-radius: 10px;
+  font-family: 'Montserrat';
+  border-radius: 0px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   background: 
     linear-gradient(
@@ -34,7 +36,7 @@ export const ContactForm = styled.form`
       rgba(82, 0, 255, 0.4)    /* Dim blue */
     );
   background-size: 400% 400%;
-  animation: gradientMovement 7s ease-in-out infinite;
+  animation: gradientMovement 15s ease-in-out infinite;
 
 
   @keyframes gradientMovement {

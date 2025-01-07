@@ -7,12 +7,12 @@ import GoogleIcon from "./Google_Icon";
 import Slider from "react-slick";
 import { useMediaQuery } from 'react-responsive';
 import ReviewButton from "./Button";
-import Center from "@/homecenter";
 
 const Container = styled.div`
   width: 100%;
   padding: 2rem 0;
-  background-color: transparent;
+  background-color: #000;
+  margin-top: 0px;
 `;
 
 const HeaderRow = styled.div`
@@ -32,7 +32,7 @@ const HeaderRow = styled.div`
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: #fff;
   text-align: center;
 
   @media (min-width: 640px) {
@@ -44,7 +44,7 @@ const StarsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-top: 10px;
 
   @media (min-width: 640px) {
     justify-content: flex-start;
@@ -60,7 +60,7 @@ const Star = styled(FaStar)`
 
 const ReviewInfo = styled.p`
   margin-left: 0.5rem;
-  color: #6b7280; /* Gray color */
+  color: #fff; /* Gray color */
   font-size: 0.865rem;
   margin-top: -8px;
 `;
@@ -82,33 +82,33 @@ const ReviewRow = styled.div`
 `;
 
 const ReviewBox = styled.div`
-  background-color: white;
+  background-color: black;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   text-align: center;
+  border: 1px solid #555; /* Solid grey border */
 `;
 
 const ReviewStars = styled.div`
   display: flex;
-  margin-top: 18px;
+  margin-top: 35px;
   justify-content: center;
   margin-bottom: 1rem;
 `;
 
 const ReviewText = styled.p`
-  color: #4b5563; /* Text gray */
+  color: #fff; /* Text gray */
   margin-bottom: 1rem;
 `;
 
 const ReviewerName = styled.p`
   font-weight: 600;
-  color: #333;
+  color: #fff;
   margin-bottom: 0.25rem;
 `;
 
 const ReviewDate = styled.p`
-  color: #6b7280; /* Gray color */
+  color: #fff; /* Gray color */
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
 `;
@@ -160,7 +160,7 @@ function GoogleReviews() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 200,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,  // Adjusts height based on content
@@ -173,7 +173,6 @@ function GoogleReviews() {
   if (!isClient) return null; // Return nothing on the server-side render
 
   return (
-    <Center>
       <Container>
         {/* Header Row */}
         <HeaderRow>
@@ -228,7 +227,6 @@ function GoogleReviews() {
           </ReviewRow>
         )}
       </Container>
-    </Center>
   );
 }
 

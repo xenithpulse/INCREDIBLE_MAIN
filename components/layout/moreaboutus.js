@@ -35,12 +35,12 @@ const MoreAboutUs = () => {
   return (
     <Section>
       <Container>
-        {boxes.map((box) => (
-            <BoxWithOutlineEffect key={box.id}>
+        {boxes.map((box, index) => (
+          <BoxWithOutlineEffect key={box.id} delay={index * 1.5}>
             <Logo>{box.logo}</Logo>
             <Heading>{box.heading}</Heading>
             <Description>{box.description}</Description>
-            </BoxWithOutlineEffect>
+          </BoxWithOutlineEffect>
         ))}
       </Container>
     </Section>

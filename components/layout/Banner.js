@@ -1,10 +1,37 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useRef, useEffect, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 
 const BannerSection = () => {
+  const bannerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(bannerRef.current); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.3, // Trigger when 50% of the banner is visible
+      }
+    );
+
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
+    }
+
+    return () => {
+      if (bannerRef.current) {
+        observer.unobserve(bannerRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper ref={bannerRef}> {/* Add ref to the wrapper */}
       <ImageContainer>
         <DimmedImage
           src="/Banner.jpg"
@@ -14,8 +41,8 @@ const BannerSection = () => {
           sizes="100vw, 1200px"
         />
         <Overlay>
-          <Heading>Made with Precision</Heading>
-          <SubHeading>Explore Our Unique Modernistic Furniture</SubHeading>
+          <Heading isVisible={isVisible}>Made with Precision</Heading> {/* Pass isVisible prop */}
+          <SubHeading isVisible={isVisible}>Explore Our Unique Minimalistic HouseHold Items</SubHeading> {/* Pass isVisible prop */}
         </Overlay>
       </ImageContainer>
     </Wrapper>
@@ -24,7 +51,6 @@ const BannerSection = () => {
 
 export default BannerSection;
 
-// Animations
 const fadeInRight = keyframes`
   from {
     opacity: 0;
@@ -46,7 +72,6 @@ const fadeInUp = keyframes`
     transform: translateY(0);
   }
 `;
-
 // Styled Components
 const Wrapper = styled.div`
   display: flex;
@@ -58,9 +83,8 @@ const Wrapper = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%x;
   height: 350px;
-  border-radius: 10px;
   overflow: hidden;
 
   @media (max-width: 768px) {
@@ -74,8 +98,7 @@ const ImageContainer = styled.div`
 
 const DimmedImage = styled(Image)`
   object-fit: cover;
-  filter: brightness(0.5); /* Dim the image */
-  border-radius: 10px;
+  filter: brightness(0.3); /* Dim the image */
 `;
 
 const Overlay = styled.div`
@@ -90,12 +113,21 @@ const Overlay = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   margin: 0;
-  animation: ${fadeInRight} 1.5s ease-in-out;
-  background: linear-gradient(to right, white, red);
+  opacity: 0;
+  transform: translateX(50px);
+
+
+  background: linear-gradient(to right, #04fbff, #4169E1, #8A2BE2, #FF69B4); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  animation: ${({ isVisible }) =>
+    isVisible &&
+    css`
+      ${fadeInRight} 1.5s ease-in-out forwards
+    `};
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
@@ -110,13 +142,20 @@ const Heading = styled.h1`
 const SubHeading = styled.p`
   font-size: 1.5rem;
   margin-top: 10px;
-  animation: ${fadeInUp} 1.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(50px);
+
+  animation: ${({ isVisible }) =>
+    isVisible &&
+    css`
+      ${fadeInUp} 1.5s ease-in-out forwards
+    `};
 
   @media (max-width: 768px) {
     font-size: 1rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.8;
+    font-size: 0.8rem;
   }
 `;

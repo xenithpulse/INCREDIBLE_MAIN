@@ -11,7 +11,9 @@ import {
   StatItem,
   StatNumber,
   StatLabel,
+  GradientTitle,
 } from '@/components/styled/whychoose_sty';
+
 
 
 const WhyChooseUs = () => {
@@ -82,7 +84,7 @@ const WhyChooseUs = () => {
 
   return (
     <Section ref={sectionRef}>
-      <Heading>Uncompromising Quality</Heading> {/* Translate title */}
+      <GradientTitle>Uncompromising Quality</GradientTitle>
       <Subheading> Design-Driven Home Essentials</Subheading> {/* Translate subtitle */}
       <Description>
       Creating a beautiful home shouldn't break the bank. Incredible Homes offers a wide range of stylish and functional home decor and household essentials at accessible prices, making quality design available to everyone.

@@ -1,12 +1,12 @@
 // whyChooseUs.styles.js
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Section = styled.section`
   padding: 50px 20px;
   background: #000;
   text-align: center;
   position: relative; /* Required for absolute positioning of ::before */
-  border-radius: 8px; /* Match the border-radius of the section */
+  border-radius: 0px; /* Match the border-radius of the section */
 
 
   /* Pseudo-element for gradient outline */
@@ -57,6 +57,55 @@ export const Description = styled.p`
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
+  }
+`;
+
+const gradientAnimation = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+
+export const GradientTitle = styled.h1`
+  font-family: 'Montserrat';
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative; // Needed for pseudo-element glow
+  background: linear-gradient(to right, #00BFFF, #8A2BE2, #EE82EE, #FF69B4);
+  background-size: 400% 400%; // Make background larger for animation
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ${gradientAnimation} 3s ease infinite; // Animate the gradient
+
+  // Glow effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 20px); // Slightly larger than text
+    height: calc(100% + 10px); // Slightly larger than text
+    background: radial-gradient(ellipse at center, rgba(174, 71, 255, 0.3), transparent); // Adjust glow color and intensity
+    filter: blur(10px); // Adjust blur amount
+    z-index: -1; // Place glow behind the text
+    pointer-events: none;
+  }
+
+  // Responsive font size
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
   }
 `;
 
