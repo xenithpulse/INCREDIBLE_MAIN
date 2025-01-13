@@ -123,9 +123,12 @@ const ProductBox = ({ product }) => {
         <Image
           src={product.images[0]}
           alt={product.title}
+          width={imageWidth}
+          height={imageHeight}
+          layout="responsive"
           objectFit="cover"
-          layout="fill"
-          priority={true}
+          sizes="(max-width: 767px) 100vw, (min-width: 768px) 33vw"
+          priority
           onLoad={() => setImageLoaded(true)} // Correct way to handle image load
           onError={() => console.error("Error loading image")} //Handle errors
           style={{ display: imageLoaded ? 'block' : 'none' }}

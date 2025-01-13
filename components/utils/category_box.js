@@ -90,10 +90,9 @@ export default function CategoryBox({ categories, loading }) {
                 <Image
                   src={category.image}
                   alt={category.name}
-                  layout="fill"  // Can be omitted if you specify width and height
+                  layout="fill"
                   objectFit="cover"
                   priority={true}
-                  loading="eager"
                 />
                 <Overlay />
                 <CategoryTitle>{category.name}</CategoryTitle>
