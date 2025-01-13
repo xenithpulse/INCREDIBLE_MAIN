@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ContactSection, ContactForm, FormGroup, Label, Input, Select, TextArea, SubmitButton, ErrorMessage, FormGroupContainer, WhatsAppButton } from '@/components/styled/ContactForm_sty';
+import { ContactSection, ContactForm, FormGroup, Label, Input, TextArea, SubmitButton, ErrorMessage, FormGroupContainer, WhatsAppButton } from '@/components/styled/ContactForm_sty';
 import Title from '@/components/styled/Title';
-import Center from '@/homecenter';
-import { Button } from '../Map/Button';
+import { useMediaQuery } from "@mui/material";
 
 
 const ContactUs = () => {
+  const isSmallDevice = useMediaQuery("(max-width: 768px)");
     const [formData, setFormData] = useState({
         fullName: '',
         phone: '',
@@ -68,37 +68,60 @@ const ContactUs = () => {
         }
       };
 
-    return (
-        <ContactSection id='contact-us'>
-            <ContactForm onSubmit={handleSubmit}>
-            <Title style={{fontSize:"1.8rem", textAlign:"center"}}><strong>Contact Us</strong></Title>
-                <FormGroupContainer style={{marginTop:"15px"}}>
-                <FormGroup>
-                    <Label htmlFor="full Name">Full Name*</Label>
-                    <Input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} />
-                    {errors.fullname && <ErrorMessage>{errors.fullname}</ErrorMessage>}
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="phone">Phone*</Label>
-                    <Input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
-                    {errors.phone && <ErrorMessage>{errors.phone}</ErrorMessage>}
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="email">Email (optional)</Label>
-                    <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-                </FormGroup>
-                </FormGroupContainer>
-                <FormGroup>
-                    <Label htmlFor="comments">Comments</Label>
-                    <TextArea id="comments" name="comments" value={formData.comments} onChange={handleChange} />
-                </FormGroup>
-                <SubmitButton type="submit">Submit</SubmitButton>
-            </ContactForm>
-
-            <Title style={{fontSize:"1.8rem", textAlign:"center"}}>Or</Title>
-            < WhatsAppButton/>
+      return (
+        <ContactSection id="contact-us">
+          <ContactForm onSubmit={handleSubmit}>
+            <Title style={{ fontSize: "1.8rem", textAlign: "center" }}>
+              <strong>Contact Us</strong>
+            </Title>
+            <FormGroupContainer style={{ marginTop: "15px" }}>
+              <FormGroup>
+                <Label htmlFor="fullName">Full Name *</Label>
+                <Input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+                {errors.fullname && <ErrorMessage>{errors.fullname}</ErrorMessage>}
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="phone">Phone *</Label>
+                <Input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                {errors.phone && <ErrorMessage>{errors.phone}</ErrorMessage>}
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="email">Email (optional)</Label>
+                <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+              </FormGroup>
+            </FormGroupContainer>
+            <FormGroup>
+              <Label htmlFor="comments">Comments</Label>
+              <TextArea id="comments" name="comments" value={formData.comments} onChange={handleChange} />
+            </FormGroup>
+            <SubmitButton type="submit">Submit</SubmitButton>
+          </ContactForm>
+          <div
+      style={{
+        fontSize: "1.8rem",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        marginRight: isSmallDevice ? "10%" : "0", // Apply margin-right only on small devices
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%", // Ensures the container spans full width
+        maxWidth: "400px", // Optional: Limit the width for better appearance
+        margin: "0 auto", // Centers the container itself
+        gap: "1rem", // Adds spacing between the items
+      }}
+    >
+      <Title>Or</Title>
+      <WhatsAppButton />
+    </div>
         </ContactSection>
-    );
-};
+      );
+    }
 
 export default ContactUs;

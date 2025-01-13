@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 // Styled components for the About section
 const AboutSection = styled.section`
@@ -11,21 +12,6 @@ const AboutSection = styled.section`
   align-items: center;
   justify-content: center;
   margin-top: 60px;
-
-  // Background image
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("https://res.cloudinary.com/dcsk6j16i/image/upload/v1729856565/dmwmsj4vaeoxg2taw4kv.jpg"); // Your image here
-    background-size: cover; // Ensure it covers the section
-    background-position: center; // Center the image
-    opacity: 0.3; // Dim the background
-    z-index: 0; // Position behind the content
-  }
 
   // Flexbox container to handle layout
   .about-container {
@@ -42,7 +28,8 @@ const AboutSection = styled.section`
     animation: fadeIn 1.5s ease-out forwards; // Apply the animation
 
     @media (max-width: 768px) {
-      gap: -15px;
+      flex-direction: column;
+      gap: 15px;
     }
   }
 
@@ -90,15 +77,12 @@ const AboutSection = styled.section`
   .about-image {
     flex: 1;
     padding-left: 20px;
-    padding-top: 105px;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInImage 1.5s ease-out 1s forwards; // Delay for image
 
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
+    @media (max-width: 768px) {
+      padding-left: 0;
     }
   }
 
@@ -113,36 +97,35 @@ const AboutSection = styled.section`
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 0px 0px;
-    .about-container {
-      flex-direction: column;
-    }
-
-    .about-text {
-      text-align: center;
-      padding-left: 15px;
-    }
-
-    .about-image {
-      padding-left: 0;
-    }
   }
 `;
 
 const AboutUs = () => {
   return (
-    <AboutSection id='about-us'>
+    <AboutSection id="about-us">
+      {/* Background Image */}
+      <Image
+        src="https://res.cloudinary.com/dcsk6j16i/image/upload/v1729856565/dmwmsj4vaeoxg2taw4kv.jpg"
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        priority
+        style={{ opacity: 0.3, zIndex: 0 }}
+      />
+
       <div className="about-container">
         {/* Left side with text */}
         <div className="about-text">
           <h2>About Us</h2>
           <p>
-          At <strong style={{color:"#00BFFF"}}>INCREDIBLE HOMES</strong>, we believe that your home should be a reflection of your unique style.
-We're dedicated to providing exceptional home decor and household items crafted with meticulous 
-attention to detail and using premium materials
+            At <strong style={{ color: "#00BFFF" }}>INCREDIBLE HOMES</strong>, we believe that your home should be a reflection of your unique style.
+            We're dedicated to providing exceptional home decor and household items crafted with meticulous
+            attention to detail and using premium materials.
           </p>
           <p>
-          From design to delivery, we strive to exceed your
-          expectations and help you create an incredible living space.
+            From design to delivery, we strive to exceed your
+            expectations and help you create an incredible living space.
           </p>
         </div>
       </div>

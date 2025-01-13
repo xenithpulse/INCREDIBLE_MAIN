@@ -1,4 +1,7 @@
+import Image from 'next/image';
 import styled from 'styled-components';
+import Skeleton from '@mui/material/Skeleton';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const ProductBoxContainer = styled.div`
@@ -29,13 +32,6 @@ const ProductBoxContainer = styled.div`
     width: 190px;
     height: 190px;
   }
-`;
-
-
-const ProductImage = styled.img`
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
 `;
 
 const TitleContainer = styled.div`
@@ -89,23 +85,63 @@ const DiscountedPercentage = styled.div`
   }
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1; // Or calculate dynamically if needed
+  overflow: hidden;
+`;
+
+const imageWidth = 300; // Provide default width
+const imageHeight = 300; // Provide default height
+const aspectRatio = `${imageWidth}/${imageHeight}`;
+
+
+
 const ProductBox = ({ product }) => {
   const router = useRouter();
   const handleImageClick = () => {
     router.push(`/product/${product.slug}`);
   };
 
-const discount_amount = product.price * product.discounted_percentage / 100
-const baseprice = product.price - discount_amount;
+  const discount_amount = (product.price * product.discounted_percentage) / 100;
+  const baseprice = product.price - discount_amount;
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
 
   return (
     <ProductBoxContainer>
-      <ProductImage src={product.images[0]} alt={product.title} onClick={handleImageClick} />
+      <ImageContainer aspectRatio={aspectRatio} onClick={handleImageClick}>
+        {!imageLoaded && (
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            sx={{ width: '100%', height: '100%', bgcolor: '#eee' }}
+          />
+        )}
+        <Image
+          src={product.images[0]}
+          alt={product.title}
+          width={imageWidth}
+          height={imageHeight}
+          layout="responsive"
+          objectFit="cover"
+          sizes="(max-width: 767px) 100vw, (min-width: 768px) 33vw"
+          priority
+          onLoad={() => setImageLoaded(true)} // Correct way to handle image load
+          onError={() => console.error("Error loading image")} //Handle errors
+          style={{ display: imageLoaded ? 'block' : 'none' }}
+        />
+      </ImageContainer>
       {product.discounted_percentage > 0 && (
-      <DiscountedPercentage>{product.discounted_percentage}% off</DiscountedPercentage>)}
+        <DiscountedPercentage>{product.discounted_percentage}% off</DiscountedPercentage>
+      )}
       <TitleContainer>
         <PriceContainer>
-          <Price><strong>PKR {baseprice}</strong></Price>
+          <Price>
+            <strong>PKR {baseprice}</strong>
+          </Price>
         </PriceContainer>
       </TitleContainer>
     </ProductBoxContainer>

@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     // Set a delay of 3 seconds
-    const timer = setTimeout(() => setLoading(false), 3000);
+    const timer = setTimeout(() => setLoading(false), 1200);
 
     return () => clearTimeout(timer); // Cleanup timer on unmount
   }, []);
@@ -91,21 +91,6 @@ export default function App({ Component, pageProps }) {
     }
   }, [router.events]);
 
-  useEffect(() => {
-    // Function to fetch country name based on IP address using ipstack
-    const fetchCountry = async () => {
-      try {
-        const response = await axios.get(`http://api.ipstack.com/check?access_key=d84e248e9687ddfe6a3329812868293f`);
-        const countryName = response.data.country_name || 'Unknown'; // ipstack returns 'country_name'
-        setCountry(countryName);
-      } catch (error) {
-        console.error('Error fetching country:', error);
-        setCountry('Unknown');
-      }
-    };
-
-    fetchCountry(); // Call the function to fetch country
-  }, []);
 
   // Send tracking data in batches
   function sendBatchData() {
@@ -140,7 +125,7 @@ export default function App({ Component, pageProps }) {
     const trackingData = {
       page: router.asPath,
       referrer: document.referrer || 'Direct',
-      country: country,
+      country: navigator.language || 'Unknown',
       timestamp: new Date(),
       device: getDeviceInfo(),
       sessionId: getSessionId(),

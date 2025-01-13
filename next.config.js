@@ -21,6 +21,11 @@ const nextConfig = {
         hostname: 'productsinn.s3.amazonaws.com',
         pathname: '/**', // You can specify a specific path here (optional)
       },
+      {
+        protocol: 'https', // Assuming both are HTTPS, adjust if needed
+        hostname: 'res.cloudinary.com',
+        pathname: '/**', // You can specify a specific path here (optional)
+      },
     ],
   },
   async rewrites() {

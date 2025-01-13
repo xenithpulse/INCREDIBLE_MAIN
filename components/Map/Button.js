@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
-  background-color: #007bff;
+const Button = styled.button`
+  background-color: #0099cc; /* Update background color */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -10,9 +10,10 @@ export const Button = styled.button`
   text-align: center;
   text-decoration: none;
   margin-top: 7px;
+  font-size: 1rem;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #0073a6; /* Update hover color */
   }
 `;
 

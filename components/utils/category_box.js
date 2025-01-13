@@ -2,10 +2,7 @@ import styled from 'styled-components';
 import NavLink from 'next/link';
 import Center from "@/homecenter";
 import Title from '../styled/Title';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-
-
+import Image from 'next/image'; // Import Next.js Image
 
 // Styled grid for categories with responsiveness
 const CategoryGrid = styled.div`
@@ -21,11 +18,11 @@ const CategoryGrid = styled.div`
   box-sizing: border-box;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media screen and (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
@@ -52,19 +49,6 @@ const CategorySquare = styled(NavLink)`
   }
 `;
 
-// Styled category image background
-const CategoryImage = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-image: url(${(props) => props.image});
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 // Styled overlay for category
 const Overlay = styled.div`
   position: absolute;
@@ -72,8 +56,8 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1; 
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 `;
 
 // Category title text style
@@ -81,8 +65,9 @@ const CategoryTitle = styled.h2`
   color: white;
   font-size: 27px;
   font-weight: bold;
-  position: relative; 
-  z-index: 2; 
+  position: relative;
+  z-index: 2;
+
   @media (max-width: 768px) {
     font-size: 20px;
     text-align: center;
@@ -94,30 +79,40 @@ export default function CategoryBox({ categories, loading }) {
     <Center>
       <Title>Categories</Title>
       <CategoryGrid>
-        {loading && <Loader />}  {/* Show loader while loading */}
-        {categories && categories.map((category) => (
-          <CategorySquare
-            href={`/category/${encodeURIComponent(category.name)}`}
-            key={category._id}
-            passHref
-          >
-            {/* Conditionally render skeleton or image */}
-            {loading ? (
-              <Skeleton
-                width={150}
-                height={150}
-                baseColor="#e0e0e0" // Adjust colors as needed
-                highlightColor="#f5f5f5"
-              />
-            ) : (
-              <CategoryImage image={category.image}>
+        {categories &&
+          categories.map((category) => (
+            <CategorySquare
+              href={`/category/${encodeURIComponent(category.name)}`}
+              key={category._id}
+              passHref
+            >
+              <CategoryImage>
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  layout="fill"
+                  objectFit="cover"
+                />
                 <Overlay />
                 <CategoryTitle>{category.name}</CategoryTitle>
               </CategoryImage>
-            )}
-          </CategorySquare>
-        ))}
+            </CategorySquare>
+          ))}
       </CategoryGrid>
     </Center>
   );
 }
+
+// Styled category image using Next.js Image
+const CategoryImage = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .next-image {
+    position: absolute !important;
+  }
+`;
