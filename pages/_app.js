@@ -22,7 +22,6 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true); // Initial loading state
   const Pixel_ID = "1102422468084127";
-  const [country, setCountry] = useState('Unknown');
 
 
   const trackingQueue = []; // Queue to store tracking data
@@ -30,7 +29,7 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     // Set a delay of 3 seconds
-    const timer = setTimeout(() => setLoading(false), 1200);
+    const timer = setTimeout(() => setLoading(false), 0);
 
     return () => clearTimeout(timer); // Cleanup timer on unmount
   }, []);

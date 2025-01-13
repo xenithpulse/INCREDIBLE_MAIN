@@ -108,7 +108,7 @@ const ContactUs = () => {
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        marginRight: isSmallDevice ? "10%" : "0", // Apply margin-right only on small devices
+        marginRight: isSmallDevice ? "25%" : "0", // Apply margin-right only on small devices
         justifyContent: "center",
         alignItems: "center",
         width: "100%", // Ensures the container spans full width
